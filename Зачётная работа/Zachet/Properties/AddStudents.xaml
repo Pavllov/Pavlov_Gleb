@@ -1,0 +1,58 @@
+﻿<Page x:Class="Zachet.Properties.AddStudents"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zachet.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddStudents">
+
+    <Grid Background="#48D1CC">
+       
+            
+            <StackPanel
+                  Background="#48D1CC"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Width="450"
+            Height="400"
+            Margin="0 0 0 0">
+                <TextBlock Text="Добавление студента" FontSize="30"  FontWeight="Bold" Margin="100 0 0 20"/>
+                <TextBlock Text="ФИО" FontSize="30" FontWeight="Bold" Margin="0 0 0 0" />
+                <TextBlock Text="Специальность" FontSize="30" FontWeight="Bold" Margin="0 0 0 5" />
+                <TextBlock Text="Год поступления" FontSize="30" FontWeight="Bold" Margin="0 0 0 5" />
+                <TextBlock Text="Форма обучения" FontSize="30" FontWeight="Bold" Margin="0 0 0 5" />
+                <TextBlock Text="Название группы" FontSize="30" FontWeight="Bold" Margin="0 0 0 5" />
+
+            </StackPanel>
+        <StackPanel
+            Background="White"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Width="200"
+            Height="200"
+            Margin="200 0 0 50">
+
+            <TextBox
+                Name="TBFIO"
+                Margin="0 10 0 5"/>
+            <ComboBox
+                Name="CBSPECI"
+                Margin="0 10 0 5"/>
+            <TextBox
+                Name="TbData"
+                Margin="0 10 0 5"/>
+            <ComboBox
+                Name="CBFormTeach"
+                Margin="0 10 0 5"/>
+            <ComboBox
+                Name="CBNameGroup"
+                Margin="0 10 0 5"/>
+            </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Content="Добавить" Margin="0 20" Click="Button_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

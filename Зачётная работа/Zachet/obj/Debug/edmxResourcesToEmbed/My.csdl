@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BazaDannixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Curs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_FIO_Curs" FromRole="Curs" ToRole="FIO" />
+  </EntityType>
+  <EntityType Name="Disceplina">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Jurnal" Relationship="Self.FK_Jurnal_Disceplina" FromRole="Disceplina" ToRole="Jurnal" />
+  </EntityType>
+  <EntityType Name="FIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdGroup" Type="Int32" />
+    <Property Name="GodPostuplenia" Type="Int32" />
+    <Property Name="IdFormaTeaching" Type="Int32" />
+    <Property Name="IdCurs" Type="Int32" />
+    <NavigationProperty Name="Curs" Relationship="Self.FK_FIO_Curs" FromRole="FIO" ToRole="Curs" />
+    <NavigationProperty Name="FormaTeaching" Relationship="Self.FK_FIO_FormaTeaching" FromRole="FIO" ToRole="FormaTeaching" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_FIO_Group" FromRole="FIO" ToRole="Group" />
+    <NavigationProperty Name="Jurnal" Relationship="Self.FK_Jurnal_FIO" FromRole="FIO" ToRole="Jurnal" />
+  </EntityType>
+  <EntityType Name="FormaTeaching">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_FIO_FormaTeaching" FromRole="FormaTeaching" ToRole="FIO" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_FIO_Group" FromRole="Group" ToRole="FIO" />
+  </EntityType>
+  <EntityType Name="Jurnal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFIO" Type="Int32" />
+    <Property Name="IdDisceplina" Type="Int32" />
+    <Property Name="Mark" Type="Int32" />
+    <NavigationProperty Name="Disceplina" Relationship="Self.FK_Jurnal_Disceplina" FromRole="Jurnal" ToRole="Disceplina" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_Jurnal_FIO" FromRole="Jurnal" ToRole="FIO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_FIO_Curs">
+    <End Role="Curs" Type="Self.Curs" Multiplicity="0..1" />
+    <End Role="FIO" Type="Self.FIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FIO">
+        <PropertyRef Name="IdCurs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurnal_Disceplina">
+    <End Role="Disceplina" Type="Self.Disceplina" Multiplicity="0..1" />
+    <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disceplina">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Jurnal">
+        <PropertyRef Name="IdDisceplina" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FIO_FormaTeaching">
+    <End Role="FormaTeaching" Type="Self.FormaTeaching" Multiplicity="0..1" />
+    <End Role="FIO" Type="Self.FIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormaTeaching">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FIO">
+        <PropertyRef Name="IdFormaTeaching" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FIO_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+    <End Role="FIO" Type="Self.FIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FIO">
+        <PropertyRef Name="IdGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jurnal_FIO">
+    <End Role="FIO" Type="Self.FIO" Multiplicity="0..1" />
+    <End Role="Jurnal" Type="Self.Jurnal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Jurnal">
+        <PropertyRef Name="IdFIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BazaDannixEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Curs" EntityType="Self.Curs" />
+    <EntitySet Name="Disceplina" EntityType="Self.Disceplina" />
+    <EntitySet Name="FIO" EntityType="Self.FIO" />
+    <EntitySet Name="FormaTeaching" EntityType="Self.FormaTeaching" />
+    <EntitySet Name="Group" EntityType="Self.Group" />
+    <EntitySet Name="Jurnal" EntityType="Self.Jurnal" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_FIO_Curs" Association="Self.FK_FIO_Curs">
+      <End Role="Curs" EntitySet="Curs" />
+      <End Role="FIO" EntitySet="FIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurnal_Disceplina" Association="Self.FK_Jurnal_Disceplina">
+      <End Role="Disceplina" EntitySet="Disceplina" />
+      <End Role="Jurnal" EntitySet="Jurnal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FIO_FormaTeaching" Association="Self.FK_FIO_FormaTeaching">
+      <End Role="FormaTeaching" EntitySet="FormaTeaching" />
+      <End Role="FIO" EntitySet="FIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FIO_Group" Association="Self.FK_FIO_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="FIO" EntitySet="FIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jurnal_FIO" Association="Self.FK_Jurnal_FIO">
+      <End Role="FIO" EntitySet="FIO" />
+      <End Role="Jurnal" EntitySet="Jurnal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
